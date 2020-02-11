@@ -28,8 +28,12 @@ class TodoForm extends Component {
   render() {
     return (
       <div>
-        <InputField placeholder="Add Todo" />
-        <StyledButton>Add Todo</StyledButton>
+        <InputField
+          placeholder="Add Todo"
+          value={this.props.text}
+          onChange={this.props.onChange}
+        />
+        <StyledButton onClick={this.props.onSubmit}>Add Todo</StyledButton>
         <StyledButton>Clear Completed</StyledButton>
       </div>
     )
