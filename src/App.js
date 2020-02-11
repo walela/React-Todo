@@ -1,6 +1,6 @@
 import React from "react"
 import uuid from "uuid"
-import styled from "styled-components"
+import "./App.css"
 import { TodoForm } from "./components/TodoComponents/TodoForm"
 import { TodoList } from "./components/TodoComponents/TodoList"
 
@@ -19,6 +19,10 @@ class App extends React.Component {
     this.setState({ text: e.target.value })
   }
 
+  handleTodoClick = e => {
+    this.state.todos.find()
+  }
+
   handleSubmit = e => {
     e.preventDefault()
     if (!this.state.text.length) {
@@ -26,7 +30,8 @@ class App extends React.Component {
     }
     const newTodo = {
       text: this.state.text,
-      id: uuid()
+      id: uuid(),
+      completed: false
     }
     this.setState(prevState => ({
       todos: prevState.todos.concat(newTodo),
@@ -42,7 +47,12 @@ class App extends React.Component {
           onChange={this.handleInputChange}
           onSubmit={this.handleSubmit}
         />
-        <TodoList todos={this.state.todos} />
+        <div className="todos">
+          <TodoList
+            todos={this.state.todos}
+            handleTodoClick={this.handleTodoClick}
+          />
+        </div>
       </div>
     )
   }

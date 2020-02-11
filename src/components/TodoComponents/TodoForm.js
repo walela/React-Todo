@@ -25,6 +25,10 @@ const StyledButton = styled.button`
   background-color: #e44232;
 `
 class TodoForm extends Component {
+  handleClear = e => {
+    const todos = document.querySelectorAll(".todos .completed")
+    new Array(todos.forEach(todo => todo.remove()))
+  }
   render() {
     return (
       <div>
@@ -34,7 +38,7 @@ class TodoForm extends Component {
           onChange={this.props.onChange}
         />
         <StyledButton onClick={this.props.onSubmit}>Add Todo</StyledButton>
-        <StyledButton>Clear Completed</StyledButton>
+        <StyledButton onClick={this.handleClear}>Clear Completed</StyledButton>
       </div>
     )
   }
