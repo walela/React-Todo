@@ -1,43 +1,50 @@
-import React from "react"
-import uuid from "uuid"
-import "./App.css"
-import { TodoForm } from "./components/TodoComponents/TodoForm"
-import { TodoList } from "./components/TodoComponents/TodoList"
+import React from 'react';
+import uuid from 'uuid';
+import './App.css';
+import { TodoForm } from './components/TodoComponents/TodoForm';
+import { TodoList } from './components/TodoComponents/TodoList';
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
   // this component is going to take care of state, and any change handlers you need to work with your state
   constructor() {
-    super()
+    super();
     this.state = {
       todos: [],
-      text: ""
-    }
+      text: ''
+    };
   }
   handleInputChange = e => {
-    this.setState({ text: e.target.value })
-  }
+    this.setState({ text: e.target.value });
+  };
 
-  handleTodoClick = e => {
-    this.state.todos.find()
-  }
+  toggleComplete = id => {
+    this.setState(state => ({
+      todos: state.todos.map(task => {
+        if (task.id === id) {
+          task.completed = !task.completed;
+        }
+        return task;
+      })
+    }));
+  };
 
   handleSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
     if (!this.state.text.length) {
-      return
+      return;
     }
     const newTodo = {
       text: this.state.text,
       id: uuid(),
       completed: false
-    }
+    };
     this.setState(prevState => ({
       todos: prevState.todos.concat(newTodo),
-      text: ""
-    }))
-  }
+      text: ''
+    }));
+  };
   render() {
     return (
       <div>
@@ -47,15 +54,16 @@ class App extends React.Component {
           onChange={this.handleInputChange}
           onSubmit={this.handleSubmit}
         />
-        <div className="todos">
+        <div className='todos'>
           <TodoList
             todos={this.state.todos}
             handleTodoClick={this.handleTodoClick}
+            toggleComplete={this.toggleComplete}
           />
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;

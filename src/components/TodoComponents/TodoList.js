@@ -5,6 +5,7 @@ import { Todo } from "./Todo"
 
 class TodoList extends Component {
   render() {
+    console.log(this.props)
     return (
       <div>
         {this.props.todos.map(todo => {
@@ -12,8 +13,9 @@ class TodoList extends Component {
             <Todo
               text={todo.text}
               key={todo.id}
+              id={todo.id}
               completed={todo.completed}
-              handleClick={this.props.handleTodoClick}
+              toggleComplete={this.props.toggleComplete}
             />
           )
         })}
